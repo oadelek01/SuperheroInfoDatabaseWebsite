@@ -99,3 +99,34 @@ app.post('/updatesuperList', (req, res) => {
     const result = updateSuperheroList(name, superheroIDs);
     res.status(result.includes('Error') ? 400 : 200).send(result);
 });
+
+// Endpoint to retrieve superhero IDs in a list
+app.get('/listIds', (req, res) => {
+    const listName = req.query.listName;
+    if (!(listName in superheroNames)) {
+        res.status(400).send(`${listName} does not exist!`);
+    }
+    else {
+        res.send(superheroNames[listName]);
+    }
+});
+
+// Endpoint to delete a superhero list
+app.delete('/deleteList', (req, res) => {
+    const listName = req.query.listName;
+    if (!(listName in superheroNames)) {
+        res.status(400).send(`${listName} does not exist!`);
+    }
+    else {
+        delete superheroNames[listName];
+        res.send(superheroNames)
+    }
+});
+
+// Endpoint to retrieve superhero information based on a list
+app.get('/information', (req, res) => {
+    const listName = req.query.listName;
+    const ids = superheroNames[listName] || [];
+    const results = ids.map(id => superheroes.find(superhero => superhero.id === id));
+    res.send(results);
+});
