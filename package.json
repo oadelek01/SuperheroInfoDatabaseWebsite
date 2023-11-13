@@ -1,0 +1,22 @@
+{
+  "name": "se3316-oadelek-lab3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oadelek01/se3316-oadelek-lab3.git"
+  },
+  "author": "Oluwatitomi Adeleke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oadelek01/se3316-oadelek-lab3/issues"
+  },
+  "homepage": "https://github.com/oadelek01/se3316-oadelek-lab3#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
