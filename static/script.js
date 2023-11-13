@@ -74,3 +74,44 @@ function addToList() {
         }),
     })
 }
+
+function displayList() {
+    const listName = document.getElementById('displayList').value;
+    let heroList = [];
+    fetch(`http://localhost:3000/info?listname=${listName}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(results => {
+        // Display the results on the webpage
+        const resultsList = document.getElementById('resultsList');
+        heroList = results;
+        resultsList.innerHTML = '';
+            fetch(`http://localhost:3000/superheroes/powers/${results[0].id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(results => {
+                console.log(results);
+                heroList.forEach(hero => {
+                    const powers = Object.keys(results).filter(key => results[key] === "True");
+                    const listItem = document.createElement('li');
+                    listItem.appendChild(document.createTextNode(`${hero.name} (${hero.Publisher}) - ${hero.Race} \n ${powers}`))
+                    resultsList.appendChild(listItem);
+                })
+            })
+        })
+        .catch(error => console.error('Error:', error));  
+    } 
+
+// Attach the searchSuperheroes function to the click event of the search button
+document.getElementById('searchButton').addEventListener('click', searchSuperheroes);
+document.getElementById('createListButton').addEventListener('click', createList);
+document.getElementById('addToListButton').addEventListener('click', addToList);
+document.getElementById('displayListButton').addEventListener('click', displayList);
