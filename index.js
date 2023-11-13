@@ -10,10 +10,27 @@ app.use('/', express.static('static'));
 // Read superhero data from the JSON file
 const rawData = fs.readFileSync('/Users/titomiadeleke/Downloads/superheroes/superhero_info.json');
 const superheroes = JSON.parse(rawData);
-
-// Enable parsing of URL-encoded and JSON request bodies
+const powers = fs.readFileSync('/Users/titomiadeleke/Downloads/superheroes/superhero_powers.json');
+const superheroes_powers = JSON.parse(powers);
 app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json())
+
+//get powers for a given superhero ID
+app.get('/superheroes/powers/:id', (req, res) => {
+        const superhero_info = superheroes.find(p => p.id === parseInt(req.params.id));
+        const superhero_power = superheroes_powers.find(p => p.hero_names === superhero_info.name);
+        if (superhero_info) {
+            res.send(superhero_power);
+        }
+        else {
+            res.status(404).send(`Superhero ID ${req.params.id} was not found!`);
+        }
+});
+
+app.get('/powers', (req, res) => {
+    res.json(superheroes_powers);
+  });
+
 
 // Retrieve powers for a specific superhero ID
 app.get('/superheroes/:id/powers', (req, res) => {

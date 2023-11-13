@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superhero Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Superhero Search</h1>
+
+    <label for="searchCriteria">Search Criteria:</label>
+    <input type="text" id="searchCriteria" placeholder="Enter criteria...">
+    <button id="searchButton" onclick="searchSuperheroes()">Search</button>
+
+    <h2>Search Results:</h2>
+    <ul id="resultsList"></ul>
+
+    <h2>Create List:</h2>
+    <input type="text" id="listName" placeholder="Enter name...">
+    <button id="createListButton" onclick="createList()">Create List</button>
+
+    <h2>Add Superhero to List:</h2>
+    <input type="text" id="addToListName" placeholder="Enter name of list...">
+    <input type="text" id="addToList" placeholder="Enter ID of superhero...">
+    <button id="addToListButton" onclick="addToList()">Add Superhero</button>
+
+    <h2>Display Created List:</h2>
+    <input type="text" id="displayList" placeholder="Enter name of list...">
+    <button id="displayListButton" onclick="displayList()">Display list</button>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
