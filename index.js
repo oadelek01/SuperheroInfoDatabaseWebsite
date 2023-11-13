@@ -41,3 +41,44 @@ app.get('/superheroes', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
+
+// Function to find superhero IDs that match a given field and pattern
+function searchSuperheroes(field, pattern, limit) {
+    const matches = superheroes.filter(superhero => {
+        const fieldValue = superhero[field] && superhero[field].toString().toLowerCase();
+        const patternLower = pattern.toLowerCase();
+
+        return fieldValue && fieldValue.includes(patternLower);
+    });
+
+    return matches.slice(0, limit);
+}
+
+// Endpoint to search for superhero IDs based on a field and pattern
+app.get('/search', (req, res) => {
+    const { field, pattern, limit } = req.query;
+    console.log(`Searching for ${limit} matches with ${field} containing ${pattern}`);
+    const response = searchSuperheroes(field, pattern, limit);
+    res.send(response);
+});  
+
+// Object to store superhero names
+const superheroNames = {}
+
+// Endpoint to add superhero names
+app.post('/supernames', (req, res) => {
+    const names = [];
+    const newName = req.body;
+    console.log("Name: ", newName);
+    
+    const superheroInfo = names.find(name => name === newName.name);
+
+    if (newName.name in superheroNames) {
+        res.status(404).send(`${newName.name} already exists!`);
+    }
+    else {
+        console.log('Adding name for ', newName.name);
+        superheroNames[newName.name] = names;
+        res.send(superheroNames);
+    }
+})
