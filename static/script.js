@@ -59,3 +59,18 @@ function createList() {
         }),
     })
 }
+
+function addToList() {
+    const addToListName = document.getElementById('addToListName').value;
+    const addToList = document.getElementById('addToList').value;
+    fetch(`http://localhost:3000/updatesuperList`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "name": `${addToListName}`,
+            "superheroIDs": [addToList]
+        }),
+    })
+}
