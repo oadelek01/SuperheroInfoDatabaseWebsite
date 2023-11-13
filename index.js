@@ -82,3 +82,20 @@ app.post('/supernames', (req, res) => {
         res.send(superheroNames);
     }
 })
+
+// Function to create or update a superhero list
+function updateSuperheroList(name, superheroIDs) {
+    if (!superheroNames[name]) {
+        return `Error: List '${name}' does not exist.`;
+    }
+
+    superheroNames[name] = superheroIDs;
+    return `Success: Updated superhero list with new IDs: '${superheroNames[name]}'.`;
+}
+
+// Endpoint to update a superhero list
+app.post('/updatesuperList', (req, res) => {
+    const { name, superheroIDs } = req.body;
+    const result = updateSuperheroList(name, superheroIDs);
+    res.status(result.includes('Error') ? 400 : 200).send(result);
+});
