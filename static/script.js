@@ -52,3 +52,20 @@ function searchSuperheroes() {
     })
     .catch(error => console.error('Error in searchSuperheroes:', error));  
 }
+
+// Function to create a superhero list
+function createList() {
+    const listName = document.getElementById('listName').value;
+
+    // Send a POST request to create a new list
+    fetch(`http://localhost:3000/names`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "name": listName,
+        }),
+    })
+    .catch(error => console.error('Error in createList:', error));
+}
