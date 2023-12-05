@@ -96,3 +96,79 @@ function addToList() {
     })
     .catch(error => console.error('Error in addToList:', error));
 }
+
+// Function to display a superhero list
+function displayList() {
+    const listName = document.getElementById('displayList').value;
+    let heroList = [];
+
+    // Check if a specific list is selected
+    if (!listName) {
+        // Fetch information about all superhero lists
+        fetch(`http://localhost:3000/info`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(results => {
+            // Display the results on the webpage
+            const resultsList = document.getElementById('resultsList');
+            heroList = results;
+            resultsList.innerHTML = '';
+
+            // Iterate through the superhero lists and display basic information
+            for (const key in heroList) {
+                const info = heroList[key];
+                const listItem = document.createElement('li');
+                listItem.appendChild(document.createTextNode(`${key} (${info?.user?.nickname}) - ${info.superHeroes?.length}`))
+                var button = document.createElement('button');
+                button.id = "btnItems";
+                button.textContent = "Expand list";
+                button.onclick = function(el) {
+                    el.target.disabled = true;
+                    window.location.href = `http://localhost:3000/info?listname=${key}`;
+                }
+                listItem.appendChild(button);
+                resultsList.appendChild(listItem);
+            }
+        })
+        .catch(error => console.error('Error in displayList:', error));
+    } else {
+        // Fetch information about a specific superhero list
+        fetch(`http://localhost:3000/info?listname=${listName}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(results => {
+            // Display the results on the webpage
+            const resultsList = document.getElementById('resultsList');
+            heroList = results;
+            resultsList.innerHTML = '';
+
+            // Fetch powers for the first hero in the list
+            fetch(`http://localhost:3000/superheroes/powers/${results[0].id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(results => {
+                console.log(results);
+                // Display information about each hero in the list along with their powers
+                heroList.forEach(hero => {
+                    const powers = Object.keys(results).filter(key => results[key] === "True");
+                    const listItem = document.createElement('li');
+                    listItem.appendChild(document.createTextNode(`${hero.name} (${hero.Publisher}) - ${hero.Race} \n ${powers}`))
+                    resultsList.appendChild(listItem);
+                })
+            })
+        })
+        .catch(error => console.error('Error in displayList:', error));  
+    }
+}
