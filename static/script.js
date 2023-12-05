@@ -172,3 +172,69 @@ function displayList() {
         .catch(error => console.error('Error in displayList:', error));  
     }
 }
+
+// Function to update user password
+function updatePassword() {
+    console.log('test')
+    document.location.href = "http://localhost:3000/updatePassword";
+}
+
+// Function to search superheroes based on a combination of criteria
+function searchSuperheroesCombination() {
+    const nameSearch = document.getElementById('name').value;
+    const raceSearch = document.getElementById('race').value;
+    const powerSearch = document.getElementById('power').value;
+    const publisherSearch = document.getElementById('publisher').value;
+    let heroPowers = [];
+
+    // Fetch superhero powers data
+    fetch(`http://localhost:3000/powers`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(results => {
+        // Filter powers based on the search criteria
+        heroPowers = results.filter(power => power[powerSearch] === 'True');
+
+        // Fetch superhero data
+        fetch(`http://localhost:3000/superheroes`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(results => {
+            // Display the results on the webpage
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = '';
+
+            // Filter superheroes based on multiple criteria
+            let filterResults = results.filter(hero => hero.name.includes(nameSearch))
+                .filter(hero => hero.Race.includes(raceSearch))
+                .filter(hero => hero.Publisher.includes(publisherSearch));
+
+            // Display filtered superheroes or heroes with matching powers
+            if (heroPowers.length > 0) {
+                filterResults = filterResults.filter(result => heroPowers.some(power => power.hero_names.includes(result.name)));
+                console.log(filterResults);
+                filterResults.forEach(hero => {
+                    const listItem = document.createElement('li');
+                    listItem.appendChild(document.createTextNode(`${hero.name} (${hero.Publisher}) - ${hero.Race}`))
+                    resultsList.appendChild(listItem);
+                });
+            }
+            else {
+                filterResults.forEach(hero => {
+                    const listItem = document.createElement('li');
+                    listItem.appendChild(document.createTextNode(`${hero.name} (${hero.Publisher}) - ${hero.Race}`))
+                    resultsList.appendChild(listItem);
+                });
+            } 
+        })
+    })
+    .catch(error => console.error('Error in searchSuperheroesCombination:', error));  
+}
