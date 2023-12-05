@@ -69,3 +69,30 @@ function createList() {
     })
     .catch(error => console.error('Error in createList:', error));
 }
+
+// Function to add a superhero to a list
+function addToList() {
+    const addToListName = document.getElementById('listName').value;
+    const addToList = document.getElementById('addToList').value;
+    const description = document.getElementById('description').value;
+    const visibility = document.querySelector('input[name="visibility"]:checked').value;
+    const rating = document.getElementById('rating').value;
+    const comment = document.getElementById('comment').value;
+
+    // Send a POST request to update the superhero list
+    fetch(`http://localhost:3000/updateSuperheroList`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "name": addToListName,
+            "superheroIDs": [addToList],
+            "description": description,
+            "visibility": visibility,
+            "rating": rating,
+            "comment": comment,
+        }),
+    })
+    .catch(error => console.error('Error in addToList:', error));
+}
