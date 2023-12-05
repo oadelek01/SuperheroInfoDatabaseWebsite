@@ -1,7 +1,9 @@
-// Your searchSuperheroes function
+// Function to search superheroes based on a specific criteria
 function searchSuperheroes() {
     const searchCriteria = document.getElementById('searchCriteria').value;
-    let hero_powers = [];
+    let heroPowers = [];
+
+    // Fetch superhero powers data
     fetch(`http://localhost:3000/powers`, {
         method: 'GET',
         headers: {
@@ -10,10 +12,10 @@ function searchSuperheroes() {
     })
     .then(response => response.json())
     .then(results => {
-        hero_powers = results.filter(power => {
-            console.log(power[searchCriteria]);
-            return power[searchCriteria] === 'True';
-        })
+        // Filter powers based on the search criteria
+        heroPowers = results.filter(power => power[searchCriteria] === 'True');
+
+        // Fetch superhero data
         fetch(`http://localhost:3000/superheroes`, {
             method: 'GET',
             headers: {
@@ -25,11 +27,15 @@ function searchSuperheroes() {
             // Display the results on the webpage
             const resultsList = document.getElementById('resultsList');
             resultsList.innerHTML = '';
+
+            // Filter superheroes based on multiple criteria
             const filterResults = results.filter(hero => {
                 return hero.name.includes(searchCriteria) || hero.Race.includes(searchCriteria) || hero.Publisher.includes(searchCriteria);
-            })
-            if (hero_powers.length > 0) {
-                hero_powers.forEach(hero => {
+            });
+
+            // Display filtered superheroes or heroes with matching powers
+            if (heroPowers.length > 0) {
+                heroPowers.forEach(hero => {
                     const listItem = document.createElement('li');
                     listItem.appendChild(document.createTextNode(`${hero.hero_names}`))
                     resultsList.appendChild(listItem);
@@ -37,81 +43,12 @@ function searchSuperheroes() {
             }
             else {
                 filterResults.forEach(hero => {
-                const listItem = document.createElement('li');
-                listItem.appendChild(document.createTextNode(`${hero.name} (${hero.Publisher}) - ${hero.Race}`))
-                resultsList.appendChild(listItem);
-            });
+                    const listItem = document.createElement('li');
+                    listItem.appendChild(document.createTextNode(`${hero.name} (${hero.Publisher}) - ${hero.Race}`))
+                    resultsList.appendChild(listItem);
+                });
             } 
         })
     })
-    .catch(error => console.error('Error:', error));  
+    .catch(error => console.error('Error in searchSuperheroes:', error));  
 }
-
-function createList() {
-    const listName = document.getElementById('listName').value;
-    fetch(`http://localhost:3000/supernames`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            "name": `${listName}`
-        }),
-    })
-}
-
-function addToList() {
-    const addToListName = document.getElementById('addToListName').value;
-    const addToList = document.getElementById('addToList').value;
-    fetch(`http://localhost:3000/updatesuperList`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            "name": `${addToListName}`,
-            "superheroIDs": [addToList]
-        }),
-    })
-}
-
-function displayList() {
-    const listName = document.getElementById('displayList').value;
-    let heroList = [];
-    fetch(`http://localhost:3000/info?listname=${listName}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    .then(response => response.json())
-    .then(results => {
-        // Display the results on the webpage
-        const resultsList = document.getElementById('resultsList');
-        heroList = results;
-        resultsList.innerHTML = '';
-            fetch(`http://localhost:3000/superheroes/powers/${results[0].id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => response.json())
-            .then(results => {
-                console.log(results);
-                heroList.forEach(hero => {
-                    const powers = Object.keys(results).filter(key => results[key] === "True");
-                    const listItem = document.createElement('li');
-                    listItem.appendChild(document.createTextNode(`${hero.name} (${hero.Publisher}) - ${hero.Race} \n ${powers}`))
-                    resultsList.appendChild(listItem);
-                })
-            })
-        })
-        .catch(error => console.error('Error:', error));  
-    } 
-
-// Attach the searchSuperheroes function to the click event of the search button
-document.getElementById('searchButton').addEventListener('click', searchSuperheroes);
-document.getElementById('createListButton').addEventListener('click', createList);
-document.getElementById('addToListButton').addEventListener('click', addToList);
-document.getElementById('displayListButton').addEventListener('click', displayList);
