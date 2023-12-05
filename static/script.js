@@ -238,3 +238,28 @@ function searchSuperheroesCombination() {
     })
     .catch(error => console.error('Error in searchSuperheroesCombination:', error));  
 }
+
+// Function to delete a superhero list
+function deleteList() {
+    const deleteListName = document.getElementById('deleteList').value;
+
+    // Send a DELETE request to delete a superhero list
+    fetch(`http://localhost:3000/deletelist?listname=${deleteListName}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .catch(error => console.error('Error in deleteList:', error));
+}
+
+// Attach event listeners to buttons
+document.getElementById('createListButton').addEventListener('click', createList);
+document.getElementById('addToListButton').addEventListener('click', addToList);
+document.getElementById('displayListButton').addEventListener('click', displayList);
+document.getElementById('updatePassword').addEventListener('click', updatePassword);
+document.getElementById('resultsList').addEventListener('click', searchSuperheroesCombination);
+document.getElementById('deleteListButton').addEventListener('click', deleteList);
+
+// Attach the searchSuperheroes function to the click event of the search button
+document.getElementById('searchButton').addEventListener('click', searchSuperheroes);
