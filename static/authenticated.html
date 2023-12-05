@@ -44,10 +44,10 @@
             <input type="text" id="addToList" placeholder="Enter ID of superhero..." required>
         </section>
         <section>
-            <input type="radio" id="public" name ="visibility" value="false"><label for="public">Public</label>
+            <input type="radio" id="public" name ="visibility" value="public"><label for="public">Public</label>
         </section>
         <section>
-            <input type="radio" id="private" name ="visibility" value="true" checked><label for="private">Private</label>
+            <input type="radio" id="private" name ="visibility" value="private" checked><label for="private">Private</label>
         </section>
         <button type="submit" id="addToListButton">Add Superhero</button>
         <button type="submit" id="createListButton">Create List</button>
@@ -56,6 +56,25 @@
     <h2>Display Created List:</h2>
     <input type="text" id="displayList" placeholder="Enter name of list...">
     <button id="displayListButton" onclick="displayList()">Display list</button>
+
+    <h2>Delete Existing List:</h2>
+    <input type="text" id="deleteList" placeholder="Enter name of list...">
+    <button id="deleteListButton" onclick="deleteList()">Delete list</button>
+
+    <h2>Add a Review With a Rating:</h2>
+    <form action="javascript:void(0)">
+        <section>
+            <input type="text" id="listName" placeholder="Enter name of list...">
+        </section>
+        <section>
+            <input type="text" id="rating" placeholder="Enter rating of list..." required><label for="rating">(Required)</label>
+        </section>
+        <section>
+            <input type="text" id="comment" placeholder="Enter comment..."><label for="comment">(Optional)</label>
+        </section>
+        <button id="addReviewButton" onclick="addToList()">Add Review</button>
+    </form>
+    
 
     <script src="script.js"></script>
 
