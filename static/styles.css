@@ -29,7 +29,7 @@ input[type="text"] {
 
 button {
     padding: 10px;
-    background-color: #4caf50;
+    background-color: #4caf50; /* Green color */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -51,4 +51,257 @@ li {
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
+}
+
+/* Additional styles for the new elements in the HTML file */
+
+form {
+    margin-top: 20px;
+}
+
+form section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+form label {
+    margin-right: 10px;
+}
+
+form input[type="radio"] {
+    margin-right: 5px;
+}
+
+form input[type="submit"],
+#updatePassword,
+#displayListButton,
+#createListButton,
+#addToListButton {
+    margin-top: 10px;
+    background-color: #4caf50; /* Green color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+form input[type="submit"]:hover,
+#updatePassword:hover,
+#displayListButton:hover,
+#createListButton:hover,
+#addToListButton:hover {
+    background-color: #45a049;
+}
+
+#displayList {
+    margin-right: 10px;
+}
+
+/* Existing styles ... */
+
+button,
+#promoteUser,
+#hideReview,
+#disableUser {
+    margin-top: 10px;
+    background-color: #4caf50; /* Green background color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+button:hover,
+#promoteUser:hover,
+#hideReview:hover,
+#disableUser:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Additional styles for the new elements in the HTML file */
+
+form section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+form label {
+    margin-right: 10px;
+}
+
+form input[type="radio"] {
+    margin-right: 5px;
+}
+
+button,
+#loginButton,
+#signupButton {
+    margin-top: 10px;
+    background-color: #4caf50; /* Green background color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+button:hover,
+#loginButton:hover,
+#signupButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Additional styles for the new elements in the HTML file */
+
+form {
+    margin-top: 20px;
+}
+
+form button {
+    margin-top: 10px;
+}
+
+/* Adjustments for better spacing */
+h1,
+h2 {
+    margin-bottom: 10px;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f2f9ff; /* Light blue background color */
+}
+
+h1 {
+    color: #333; /* Dark text color for h1 */
+}
+
+form {
+    margin-top: 20px;
+}
+
+form section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+form label {
+    margin-right: 10px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f2f9ff; /* Light blue background color */
+}
+
+h1 {
+    color: #333; /* Dark text color for h1 */
+}
+
+form {
+    margin-top: 20px;
+}
+
+form section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+form label {
+    margin-right: 10px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f2f9ff; /* Light blue background color */
+}
+
+h1 {
+    color: #333; /* Dark text color for h1 */
+}
+
+form {
+    margin-top: 20px;
+}
+
+form section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+form label {
+    margin-right: 10px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
 }
